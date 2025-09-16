@@ -1,0 +1,164 @@
+apiVersion: mke.mirantis.com/v1alpha1
+kind: MkeConfig
+metadata:
+  creationTimestamp: null
+  name: mke
+  namespace: mke
+spec:
+  airgap:
+    enabled: false
+  apiServer:
+    audit:
+      enabled: false
+      logPath: /var/log/k0s/audit/mke4_audit.log
+      maxAge: 30
+      maxBackup: 10
+      maxSize: 10
+    encryptionProvider: /var/lib/k0s/encryption.cfg
+    eventRateLimit:
+      enabled: false
+    requestTimeout: 1m0s
+  authentication:
+    expiry: {}
+    ldap:
+      enabled: false
+    oidc:
+      enabled: false
+    saml:
+      enabled: false
+  backup:
+    enabled: true
+    scheduled_backup:
+      enabled: false
+    storage_provider:
+      external_options: {}
+      in_cluster_options:
+        admin_credentials_secret: minio-credentials
+        enable_ui: true
+      type: InCluster
+  cloudProvider:
+    enabled: false
+    provider: aws
+  controllerManager:
+    terminatedPodGCThreshold: 12500
+  devicePlugins:
+    nvidiaGPU:
+      enabled: false
+      mig: {}
+  dns:
+    lameduck: {}
+  etcd: {}
+  hosts:
+  - role: controller+worker 
+    ssh:
+      address: 10.0.0.160
+      keyPath: /home/trent/.ssh/github_rsa
+      port: 22
+      user: kairos
+  - role: controller+worker
+    ssh:
+      address: 10.0.0.161
+      keyPath: /home/trent/.ssh/github_rsa
+      port: 22
+      user: kairos
+  - role: controller+worker
+    ssh:
+      address: 10.0.0.162
+      keyPath: /home/trent/.ssh/github_rsa
+      port: 22
+      user: kairos
+  ingressController:
+    affinity:
+      nodeAffinity: {}
+    enabled: true
+    extraArgs:
+      defaultSslCertificate: mke/mke-ingress.tls
+      enableSslPassthrough: false
+      httpPort: 80
+      httpsPort: 443
+    nodePorts: {}
+    ports: {}
+    replicaCount: 2
+  kubelet:
+    eventRecordQPS: 50
+    managerKubeReserved:
+      cpu: 250m
+      ephemeral-storage: 4Gi
+      memory: 2Gi
+    maxPods: 110
+    podPidsLimit: -1
+    podsPerCore: 0
+    protectKernelDefaults: false
+    seccompDefault: false
+    workerKubeReserved:
+      cpu: 50m
+      ephemeral-storage: 500Mi
+      memory: 300Mi
+  license:
+    token: "mke-token-here"
+  monitoring:
+    enableCAdvisor: false
+    enableGrafana: true
+    enableOpscare: false
+    grafana:
+      ingress:
+        enabled: false
+    prometheus: {}
+  network:
+    cplb:
+      disabled: true
+    kubeProxy:
+      iptables:
+        minSyncPeriod: 0s
+        syncPeriod: 0s
+      ipvs:
+        minSyncPeriod: 0s
+        syncPeriod: 0s
+        tcpFinTimeout: 0s
+        tcpTimeout: 0s
+        udpTimeout: 0s
+      metricsBindAddress: 0.0.0.0:10249
+      mode: iptables
+      nftables:
+        minSyncPeriod: 0s
+        syncPeriod: 0s
+    multus:
+      enabled: false
+    nllb:
+      disabled: true
+    nodePortRange: 32768-35535
+    providers:
+    - enabled: true
+      extraConfig:
+        cidrV4: 192.168.0.0/16
+        linuxDataplane: Iptables
+        loglevel: Info
+      provider: calico
+    - enabled: false
+      provider: custom
+    - enabled: false
+      extraConfig:
+        cidrV4: 192.168.0.0/16
+        v: "5"
+      provider: kuberouter
+    - enabled: false
+      extraConfig:
+        ipam.operator.clusterPoolIPv4PodCIDRList: 192.168.0.0/16
+        routingMode: tunnel
+        tunnelProtocol: vxlan
+      provider: cilium
+    serviceCIDR: 10.96.0.0/16
+  policyController:
+    opaGatekeeper:
+      enabled: false
+  registries:
+    chartRegistry:
+      url: oci://registry.mirantis.com/mke
+    imageRegistry:
+      url: registry.mirantis.com/mke
+  scheduler: {}
+  tracking:
+    enabled: true
+  version: v4.1.0
+
+

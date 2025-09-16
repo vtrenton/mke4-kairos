@@ -1,0 +1,15 @@
+#cloud-config
+debug: true
+hostname: mke4k-{{ trunc 4 .MachineID }}
+install:
+    device: auto
+    poweroff: true
+    reboot: false
+users:
+    - groups:
+        - admin
+        - wheel
+      name: kairos
+      passwd: kairos
+      ssh_authorized_keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDTMKTkjwdb5qY5hekcTrTEdNXmLE3Yjf4mUJYR8cLClSKfoRThL+s2zmjm4+Ca0dNEEgMHg5VUk569Gc7MRakXTnVL/bvU9SNY5o1xtjJn/edtgoSizzu0XEyVGODNNI0vzVEqh7EncP4jOHzvmdcLXagRsfhdIZ4c45DuP+bJH+x0aV/okgK1hC/Ko8WbALpoBi+JaBP6UgHXNoVaucb/odmm+0Ly9hcNwG0J4F94k1VLa86rNV6INqxJZb46+0QIEISPy93P0IdMLBABUib18ONonou6rs/n2Ed+I0THRU4vUMW2gMW9JedfGlK0KaRlfAFD2KPYKqCrI09aFpgRyW4ID0M3C758oppV4478bIaMHjBUxExpP6XRK8Mf4KLAe0Tjhs3NwUKdRGHQebwZIs3ZyIsZRJtsvk7I1KT0y0l7AvgQUbGztMZOEN/Ibg+bTLJKvD97nBlc8l5J51xWFvRIsRONzEtslksXvjOQu8Q4Zy7hpvjm1KMTiGtbSdkeHS/ZN9Y5NhQ08Umd9sq7CZrkpul4Cnc5zsi0DoqVS03piGnb4yB2pjfHJscapqmwqqFV7eC1DNW8wZkuTbYAF5lmd4/8UdtsiUMFqWaW1d7EFZ7Xr23M/LKX9k/ub8ofHHEfsKcK3iSZ/5NEgiuaSNmDBBdWMstACygxIGRvLw==
