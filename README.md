@@ -47,6 +47,6 @@ docker run --rm -v $PWD:/mnt quay.io/kairos/kairos-agent:latest \
 ## integration with k0rdent/MKE4
 
 ### Check out:
-https://github.com/kairos-io/cluster-api-provider-kairos
-https://github.com/kairos-io/osbuilder
-https://github.com/kairos-io/kairos-operator
+- https://github.com/kairos-io/cluster-api-provider-kairos
+- https://github.com/kairos-io/osbuilder
+- https://github.com/kairos-io/kairos-operator
